@@ -5,6 +5,7 @@
   "dependencies": {
     "@mantine/core": "^6.0.10",
     "@mantine/form": "^6.0.10",
+    "@remla23-team2/lib2": "^1.0.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
