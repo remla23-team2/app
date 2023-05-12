@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createStyles, Header, Title } from '@mantine/core';
-import { getVersion } from '@remla23-team2/lib2/version-util';
+import { getVersion } from '@remla23-team2/lib/version-util';
 import './navbar.scss'
 
 export function Navbar() {
