@@ -1,7 +1,13 @@
 import { TextInput, Checkbox, Button, Group, Box, Card, Textarea } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useContext } from 'react';
+import { SentimentContext } from '../../providers/sentimentProvider';
+import { notifications, Notifications } from '@mantine/notifications';
+import { IconMoodAngry, IconMoodHappy } from '@tabler/icons-react';
+
 import './review.scss'
 export default function Review() {
+    const { getSentiment } = useContext(SentimentContext)
     const form = useForm({
         initialValues: {
             name: '',
@@ -9,10 +15,28 @@ export default function Review() {
         },
     });
 
+    function submitSentiment(review) {
+        getSentiment(review).then((res) => {
+            if (res === 'Positive') {
+                showPositive()
+            } else {
+                showNegative()
+            }
+        })
+    }
+
+    function showPositive() {
+        notifications.show({ color: 'green', icon: <IconMoodHappy />, message: 'Thank you for your positive review!' });
+    }
+    function showNegative() {
+        notifications.show({ color: 'red', icon: <IconMoodAngry />, message: "We're sorry that you feel this way!" });
+    }
+
     return (
         <Card className='review' shadow="md" padding="lg" radius="md" withBorder>
+            <Notifications position="bottom-center" zIndex={2077} />
             <Box maw={300} mx="auto">
-                <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                <form onSubmit={form.onSubmit((values) => submitSentiment(values.review))}>
                     <TextInput
                         withAsterisk
                         label="Name"
