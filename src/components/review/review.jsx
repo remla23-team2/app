@@ -19,8 +19,10 @@ export default function Review() {
         getSentiment(review).then((res) => {
             if (res === 'Positive') {
                 showPositive()
+                console.log(res)
             } else {
                 showNegative()
+                console.log(res)
             }
         })
     }
