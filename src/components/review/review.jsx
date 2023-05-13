@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 import { useContext } from 'react';
 import { SentimentContext } from '../../providers/sentimentProvider';
 import { notifications, Notifications } from '@mantine/notifications';
-import { IconMoodAngry, IconMoodHappy } from '@tabler/icons-react';
+import { IconMoodSad, IconMoodHappy } from '@tabler/icons-react';
 
 import './review.scss'
 export default function Review() {
@@ -31,7 +31,7 @@ export default function Review() {
         notifications.show({ color: 'green', icon: <IconMoodHappy />, message: 'Thank you for your positive review!' });
     }
     function showNegative() {
-        notifications.show({ color: 'red', icon: <IconMoodAngry />, message: "We're sorry that you feel this way!" });
+        notifications.show({ color: 'red', icon: <IconMoodSad />, message: "We're sorry that you feel this way!" });
     }
 
     return (
@@ -53,9 +53,6 @@ export default function Review() {
                         maxRows={12}
                         {...form.getInputProps('review')}
                     />
-
-
-
                     <Group position="right" mt="md">
                         <Button type="submit">Submit</Button>
                     </Group>
