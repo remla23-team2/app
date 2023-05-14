@@ -28,7 +28,7 @@ export default function Review() {
     function submitSentiment(values) {
         let review = values.review
         console.log(values)
-        getSentiment(review).then((res) => {
+        getSentiment(values).then((res) => {
             if (res === 'Positive') {
                 showPositive()
                 console.log(res)
