@@ -3,19 +3,31 @@ import { useForm } from '@mantine/form';
 import { useContext } from 'react';
 import { SentimentContext } from '../../providers/sentimentProvider';
 import { notifications, Notifications } from '@mantine/notifications';
-import { IconMoodSad, IconMoodHappy } from '@tabler/icons-react';
+import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy } from '@tabler/icons-react';
+import { Center, SegmentedControl } from '@mantine/core';
 
 import './review.scss'
 export default function Review() {
     const { getSentiment } = useContext(SentimentContext)
     const form = useForm({
         initialValues: {
-            name: '',
+            // name: '',
             review: '',
+            ground_truth: '',
         },
+        validate: {
+            ground_truth: (value) => {
+                if (value === '') {
+                    notifications.show({ color: 'orange', message: 'Please add a thumbs up or thumbs down.' });
+                }
+                return value !== '' ? null : 'not filled in '
+            }
+        }
     });
 
-    function submitSentiment(review) {
+    function submitSentiment(values) {
+        let review = values.review
+        console.log(values)
         getSentiment(review).then((res) => {
             if (res === 'Positive') {
                 showPositive()
@@ -38,12 +50,36 @@ export default function Review() {
         <Card className='review' shadow="md" padding="lg" radius="md" withBorder>
             <Notifications position="bottom-center" zIndex={2077} />
             <Box maw={300} mx="auto">
-                <form onSubmit={form.onSubmit((values) => submitSentiment(values.review))}>
-                    <TextInput
+                <form onSubmit={form.onSubmit((values) => submitSentiment(values))}>
+                    {/* <TextInput
                         withAsterisk
                         label="Name"
                         placeholder="Name"
                         {...form.getInputProps('name')}
+                    /> */}
+                    <SegmentedControl color={form.values.ground_truth === 'Positive' ? 'green' : 'red'}
+                        data={[
+                            {
+                                value: 'Positive',
+                                color: 'green',
+                                label: (
+                                    <Center>
+                                        <IconThumbUp colo size="1rem" />
+                                        {/* <Box ml={10}>Preview</Box> */}
+                                    </Center>
+                                ),
+                            },
+                            {
+                                value: 'Negative',
+                                label: (
+                                    <Center>
+                                        <IconThumbDown size="1rem" />
+                                        {/* <Box ml={10}>Code</Box> */}
+                                    </Center>
+                                ),
+                            },
+                        ]}
+                        {...form.getInputProps('ground_truth')}
                     />
                     <Textarea
                         withAsterisk
