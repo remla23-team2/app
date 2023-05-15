@@ -5,7 +5,7 @@ export const SentimentContext = createContext({})
 export default function SentimentProvider(props) {
 
     async function getSentiment(review) {
-        const url = "REACT_APP_API_URL" + "/predict";
+        const url = process.env.REACT_APP_API_URL + "/predict";
         const httpOptions = {
             method: "POST",
             headers: {
