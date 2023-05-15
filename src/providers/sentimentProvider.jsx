@@ -5,7 +5,7 @@ export const SentimentContext = createContext({})
 export default function SentimentProvider(props) {
 
     async function getSentiment(review) {
-        const url = 'http://model-service-serv:8080/predict'
+        const url = 'http://localhost:8080/predict'
         const httpOptions = {
             method: "POST",
             headers: {
