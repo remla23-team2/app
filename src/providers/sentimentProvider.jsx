@@ -1,5 +1,4 @@
 import React, { createContext, useState } from 'react'
-import axios from 'axios'
 
 export const SentimentContext = createContext({})
 
@@ -16,8 +15,7 @@ export default function SentimentProvider(props) {
         }
         console.log(process.env); // log the env object
         console.log(url); // log the url
-        // const response = await fetch(url, httpOptions);
-        const response = await axios.post(url, { "review": review });
+        const response = await fetch(url, httpOptions);
         console.log(response); // log the response object
         const responseBody = await response.json();
         console.log(responseBody); // log the response body
