@@ -13,6 +13,7 @@ export default function SentimentProvider(props) {
             },
             body: JSON.stringify({ "review": review })
         }
+        console.log(process.env); // log the env object
         console.log(url); // log the url
         const response = await fetch(url, httpOptions);
         console.log(response); // log the response object
