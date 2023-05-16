@@ -16,6 +16,9 @@ RUN echo "@remla23-team2:registry=https://npm.pkg.github.com" >> /app/.npmrc && 
 
 COPY . /app/
 
+ARG REACT_APP_MODEL_SERVICE_URL
+ENV REACT_APP_MODEL_SERVICE_URL=${REACT_APP_MODEL_SERVICE_URL}
+
 # ==== BUILD =====
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 # Build the app
