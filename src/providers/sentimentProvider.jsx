@@ -13,6 +13,7 @@ export default function SentimentProvider(props) {
             },
             body: JSON.stringify({ "review": review })
         }
+        console.log(url); // log the url
         const response = await fetch(url, httpOptions);
         console.log(response); // log the response object
         const responseBody = await response.json();
