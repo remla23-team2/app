@@ -20,8 +20,10 @@ COPY . /app/
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 # Build the app
 RUN npm run build
+
+RUN npm install -g serve
 # ==== RUN =======
 # Expose the port on which the app will be running (3000 is the default that `serve` uses)
 EXPOSE 3000
 # Start the app
-CMD [ "npm", "start" ]
+CMD [ "serve","-s", "build"]
