@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 import { useContext } from 'react';
 import { SentimentContext } from '../../providers/sentimentProvider';
 import { notifications, Notifications } from '@mantine/notifications';
-import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy } from '@tabler/icons-react';
+import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy, IconNumber1 } from '@tabler/icons-react';
 import { Center, SegmentedControl } from '@mantine/core';
 
 import './review.scss'
@@ -73,7 +73,7 @@ export default function Review() {
                                 value: 'Negative',
                                 label: (
                                     <Center>
-                                        <IconThumbDown size="1rem" />
+                                        <IconNumber1 size="1rem" />
                                         {/* <Box ml={10}>Code</Box> */}
                                     </Center>
                                 ),
