@@ -11,7 +11,7 @@ export default function SentimentProvider(props) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ "review": values.review, "ground_truth": values.ground_truth })
+            body: JSON.stringify({ "review": values.review, "ground_truth": values.ground_truth, "rating": values.rating })
         }
         console.log(process.env); // log the env object
         console.log(url); // log the url

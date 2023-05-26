@@ -1,4 +1,4 @@
-import { TextInput, Checkbox, Button, Group, Box, Card, Textarea } from '@mantine/core';
+import { TextInput, Checkbox, Button, Group, Box, Card, Textarea, Rating } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useContext } from 'react';
 import { SentimentContext } from '../../providers/sentimentProvider';
@@ -14,6 +14,7 @@ export default function Review() {
             // name: '',
             review: '',
             ground_truth: '',
+            rating: 0
         },
         validate: {
             ground_truth: (value) => {
@@ -21,6 +22,12 @@ export default function Review() {
                     notifications.show({ color: 'orange', message: 'Please add a thumbs up or thumbs down.' });
                 }
                 return value !== '' ? null : 'not filled in '
+            },
+            rating: (value) => {
+                if (value === 0) {
+                    notifications.show({ color: 'orange', message: 'Please add a rating.' });
+                }
+                return value !== 0 ? null : 'not filled in '
             }
         }
     });
@@ -88,6 +95,17 @@ export default function Review() {
                         minRows={6}
                         maxRows={12}
                         {...form.getInputProps('review')}
+                    />
+                    <Rating
+                        label="Rating"
+                        value={form.values.rating}
+                        onChange={(value) => form.setFieldValue('rating', value)}
+                        colors={{
+                        filled: '#FCD34D', // Customize the filled star color
+                        empty: '#E2E8F0', // Customize the empty star color
+                        }}
+                        size={24} // Customize the size of the stars
+                        style={{ marginTop: '16px' }}
                     />
                     <Group position="right" mt="md">
                         <Button type="submit">Submit</Button>
