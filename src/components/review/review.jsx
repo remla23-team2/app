@@ -6,6 +6,8 @@ import { notifications, Notifications } from '@mantine/notifications';
 import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy } from '@tabler/icons-react';
 import { Center, SegmentedControl } from '@mantine/core';
 
+import './review.scss'
+
 const HeartRating = ({ value, onChange }) => {
     const renderHeart = (index) => {
       const isFilled = index <= value;
@@ -29,7 +31,6 @@ const HeartRating = ({ value, onChange }) => {
     );
   };
 
-import './review.scss'
 export default function Review() {
     const { getSentiment } = useContext(SentimentContext)
     const form = useForm({
