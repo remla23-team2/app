@@ -100,11 +100,9 @@ export default function Review() {
                         label="Rating"
                         value={form.values.rating}
                         onChange={(value) => form.setFieldValue('rating', value)}
-                        colors={{
-                        filled: '#FCD34D', // Customize the filled star color
-                        empty: '#E2E8F0', // Customize the empty star color
-                        }}
-                        size={24} // Customize the size of the stars
+                        iconFilled={<span style={{ color: 'red' }}>❤️</span>} // Customize the filled heart icon
+                        iconEmpty={<span style={{ color: 'red' }}>♡</span>} // Customize the empty heart icon
+                        size={24} // Customize the size of the hearts
                         style={{ marginTop: '16px' }}
                     />
                     <Group position="right" mt="md">
