@@ -1,10 +1,33 @@
-import { TextInput, Checkbox, Button, Group, Box, Card, Textarea, Rating } from '@mantine/core';
+import { TextInput, Checkbox, Button, Group, Box, Card, Textarea } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useContext } from 'react';
 import { SentimentContext } from '../../providers/sentimentProvider';
 import { notifications, Notifications } from '@mantine/notifications';
 import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy } from '@tabler/icons-react';
 import { Center, SegmentedControl } from '@mantine/core';
+
+const HeartRating = ({ value, onChange }) => {
+    const renderHeart = (index) => {
+      const isFilled = index <= value;
+      const heartIcon = isFilled ? <span style={{ color: 'red' }}>❤️</span> : <span style={{ color: 'red' }}>♡</span>;
+  
+      return (
+        <span
+          key={index}
+          style={{ cursor: 'pointer' }}
+          onClick={() => onChange(index)}
+        >
+          {heartIcon}
+        </span>
+      );
+    };
+  
+    return (
+      <div style={{ marginTop: '16px' }}>
+        {[1, 2, 3, 4, 5].map((index) => renderHeart(index))}
+      </div>
+    );
+  };
 
 import './review.scss'
 export default function Review() {
@@ -96,14 +119,9 @@ export default function Review() {
                         maxRows={12}
                         {...form.getInputProps('review')}
                     />
-                    <Rating
-                        label="Rating"
+                    <HeartRating
                         value={form.values.rating}
                         onChange={(value) => form.setFieldValue('rating', value)}
-                        iconFilled={<span style={{ color: 'red' }}>❤️</span>} // Customize the filled heart icon
-                        iconEmpty={<span style={{ color: 'red' }}>♡</span>} // Customize the empty heart icon
-                        size={24} // Customize the size of the hearts
-                        style={{ marginTop: '16px' }}
                     />
                     <Group position="right" mt="md">
                         <Button type="submit">Submit</Button>
