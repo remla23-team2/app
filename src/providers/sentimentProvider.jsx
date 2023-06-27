@@ -5,15 +5,15 @@ export const SentimentContext = createContext({})
 export default function SentimentProvider(props) {
 
     async function getSentiment(values) {
-        const url = process.env.REACT_APP_API_URL + "/predict";
+        const url = window._env_.API_URL + "/modelservice/predict";
         const httpOptions = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ "review": values.review, "ground_truth": values.ground_truth })
+            body: JSON.stringify({ "review": values.review, "ground_truth": values.ground_truth, "rating": values.rating, "rating_type": "hearts" })
         }
-        console.log(process.env); // log the env object
+        console.log(window._env_); // log the env object
         console.log(url); // log the url
         const response = await fetch(url, httpOptions);
         console.log(response); // log the response object
