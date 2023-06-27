@@ -5,7 +5,7 @@ export const SentimentContext = createContext({})
 export default function SentimentProvider(props) {
 
     async function getSentiment(values) {
-        const url = window._env_.API_URL + "/modelservice/predict";
+        const url = "api/modelservice/predict";
         const httpOptions = {
             method: "POST",
             headers: {

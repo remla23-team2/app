@@ -21,7 +21,8 @@ COPY . /app/
 # Build the app
 RUN npm run build
 
-FROM nginx:alpine AS prod
+FROM nginx:1.21-alpine AS prod
+
 WORKDIR /usr/share/nginx/html
 COPY --from=stage /app/build .
 EXPOSE 80
@@ -29,14 +30,8 @@ EXPOSE 80
 
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html
-COPY ./env.sh .
-COPY .env .
 
-# Add bash
-RUN apk add --no-cache bash
-
-# Make our shell script executable
-RUN chmod +x env.sh
+COPY nginx.conf /etc/nginx/templates/default.conf.template
 
 # Start Nginx server
-CMD ["/bin/bash", "-c", "/usr/share/nginx/html/env.sh && nginx -g \"daemon off;\""])
+CMD ["nginx", "-g", "daemon off;"]
