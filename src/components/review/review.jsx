@@ -7,6 +7,30 @@ import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy } from '@tabler/
 import { Center, SegmentedControl } from '@mantine/core';
 
 import './review.scss'
+
+const HeartRating = ({ value, onChange }) => {
+    const renderHeart = (index) => {
+      const isFilled = index <= value;
+      const heartIcon = isFilled ? <span style={{ color: 'red' }}>❤️</span> : <span style={{ color: 'red' }}>♡</span>;
+  
+      return (
+        <span
+          key={index}
+          style={{ cursor: 'pointer' }}
+          onClick={() => onChange(index)}
+        >
+          {heartIcon}
+        </span>
+      );
+    };
+  
+    return (
+      <div style={{ marginTop: '16px' }}>
+        {[1, 2, 3, 4, 5].map((index) => renderHeart(index))}
+      </div>
+    );
+  };
+
 export default function Review() {
     const { getSentiment } = useContext(SentimentContext)
     const form = useForm({
@@ -14,6 +38,7 @@ export default function Review() {
             // name: '',
             review: '',
             ground_truth: '',
+            rating: 0
         },
         validate: {
             ground_truth: (value) => {
@@ -21,6 +46,12 @@ export default function Review() {
                     notifications.show({ color: 'orange', message: 'Please add a thumbs up or thumbs down.' });
                 }
                 return value !== '' ? null : 'not filled in '
+            },
+            rating: (value) => {
+                if (value === 0) {
+                    notifications.show({ color: 'orange', message: 'Please add a rating.' });
+                }
+                return value !== 0 ? null : 'not filled in '
             }
         }
     });
@@ -88,6 +119,10 @@ export default function Review() {
                         minRows={6}
                         maxRows={12}
                         {...form.getInputProps('review')}
+                    />
+                    <HeartRating
+                        value={form.values.rating}
+                        onChange={(value) => form.setFieldValue('rating', value)}
                     />
                     <Group position="right" mt="md">
                         <Button type="submit">Submit</Button>
