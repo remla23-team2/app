@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 import { useContext } from 'react';
 import { SentimentContext } from '../../providers/sentimentProvider';
 import { notifications, Notifications } from '@mantine/notifications';
-import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy } from '@tabler/icons-react';
+import { IconMoodSad, IconThumbUp, IconThumbDown, IconMoodHappy, IconStar } from '@tabler/icons-react';
 import { Center, SegmentedControl } from '@mantine/core';
 
 import './review.scss'
@@ -100,8 +100,6 @@ export default function Review() {
                         label="Rating"
                         value={form.values.rating}
                         onChange={(value) => form.setFieldValue('rating', value)}
-                        iconFilled={<span style={{ color: 'red' }}>❤️</span>} // Customize the filled heart icon
-                        iconEmpty={<span style={{ color: 'red' }}>♡</span>} // Customize the empty heart icon
                         size={24} // Customize the size of the hearts
                         style={{ marginTop: '16px' }}
                     />
